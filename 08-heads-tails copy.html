@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+
+    <button 
+      onclick="
+        guess = 'heads';
+        playGame(guess);
+    ">Heads</button>
+
+    <button
+      onclick="
+        guess = 'tails';
+        playGame(guess);
+    ">Tails</button>
+
+    <script>
+      
+      const score = JSON.parse(localStorage.getItem('score')) || {
+        wins: 0,
+        losses: 0,
+      }
+
+      // I have been forgeting lately to place the '', when I am writing the getItem method. Due to this it consitentaly causes an error.
+      function playGame(guess) {
+        const randomNumber = Math.random();
+        const result = randomNumber < 0.5 ? 'heads' : 'tails';
+
+        console.log(guess === result ? 'You win!' : 'You lose!');
+        console.log(`Computer picked ${result}`);
+
+        if(guess === result) {
+          score.wins ++;
+          console.log(score);
+        } else {
+          score.losses ++;
+          console.log(score);
+        }
+
+        localStorage.setItem('score', JSON.stringify(score))
+
+      }
+
+      //const guess = 'heads';
+      //console.log(guess === result ? 'You win!' : 'You lose!');
+    </script>
+  </body>
+</html>
